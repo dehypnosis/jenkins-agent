@@ -1,6 +1,5 @@
 # ref: https://github.com/jenkinsci/docker-jnlp-slave/blob/master/Dockerfile
 FROM jenkins/jnlp-slave:alpine
-
 USER root
 
 # install docker client
@@ -16,14 +15,8 @@ RUN apk add --update ca-certificates \
     && chmod +x /usr/local/bin/kubectl \
     && apk del --purge deps
 
-# json parsing tool
-RUN apk add --update jq
-
 # remove deps and apk cache
 RUN rm /var/cache/apk/*
-
-# return to jenkins
-USER jenkins
 
 # change entry script
 ADD entrypoint.sh /
