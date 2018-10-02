@@ -46,3 +46,20 @@ Images
         
 
 ```
+
+## Solve DinD volume mounting problem
+
+Current agent image mounts docker host's (k8s node) /var/run/docker.sock, So volume mounting needs tricky pattern.
+
+For example, below command will not mount `SCM tree's ./src dir` but `k8s node's $PWD/src` dir.
+```
+docker run -v ./src:/my-images-some-directory my-image do-something
+```
+
+To solve this problem, `./entrypoint.sh` export's the variable `$DOCKER_HOST_HOME` which is real host path of jenkins agent's `$HOME` (/root).
+So, This can be use when mounting volume in DinD situation.
+
+For example, below command will work!
+```
+docker -run -v ${PWD/$HOME/$DOCKER_HOST_HOME}/src:/my-images-some-directory my-image do-something
+```
