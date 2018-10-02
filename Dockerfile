@@ -15,6 +15,9 @@ RUN apk add --update ca-certificates \
     && chmod +x /usr/local/bin/kubectl \
     && apk del --purge deps
 
+# install utils
+RUN apk add --update make
+
 # remove deps and apk cache
 RUN rm /var/cache/apk/*
 

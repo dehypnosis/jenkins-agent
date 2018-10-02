@@ -56,7 +56,7 @@ For example, below command will not mount `SCM tree's ./src dir` but `k8s node's
 docker run -v ./src:/my-images-some-directory my-image do-something
 ```
 
-To solve this problem, `./entrypoint.sh` export's the variable `$DOCKER_HOST_HOME` which is real host path of jenkins agent's `$HOME` (/root).
+To solve this problem, `./entrypoint.sh` exports the variable `$DOCKER_HOST_HOME` which is real host path of jenkins agent's `$HOME` (/root).
 So, This can be use when mounting volume in DinD situation.
 
 For example, below command will work!
